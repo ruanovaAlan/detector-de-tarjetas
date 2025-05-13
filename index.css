@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+body {
+  font-family: "Share Tech", sans-serif;
+  background-color: #9CA2AB;
+  display: grid;
+  min-height: 100dvh;
+  grid-template-rows: 2fr auto;
+}
