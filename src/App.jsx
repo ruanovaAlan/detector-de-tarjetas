@@ -6,6 +6,7 @@ import Visa from './assets/Visa.webp'
 import Mastercard from './assets/mastercard.webp'
 import ErrorImg from './assets/Error.webp'
 import ReloadIcon from './assets/sync.webp'
+import Logo from './assets/logo.png'
 
 import { motion, AnimatePresence } from 'framer-motion'
 import InfoTooltip from './components/InfoTooltip';
@@ -52,9 +53,12 @@ function App() {
   }
 
   return (
-    <main className='flex flex-col justify-center items-center h-dvh gap-6 px-6 sm:px-0'>
+    <main className='flex flex-col justify-baseline mt-5 sm:justify-center items-center h-dvh gap-6 px-6 sm:px-0'>
 
-      <h1 className='text-5xl text-black text-center font-bold mb-4'>Detector de tarjetas</h1>
+      <article className='flex flex-col sm:flex-row items-center gap-5 mb-6'>
+        <img src={Logo} alt="App Logo" className='pt-1 pb-0 pl-1 pr-1 bg-[#0091AD] rounded-full w-[5.5rem] h-auto shadow-md' />
+        <h1 className='text-5xl text-black text-center font-bold '>Detector de tarjetas</h1>
+      </article>
 
       <div className='flex gap-5 items-center'>
         <motion.input
@@ -75,7 +79,7 @@ function App() {
 
       </div>
 
-      <div className="flex justify-center items-center gap-3 w-80 mt-4">
+      <div className="flex justify-center items-center gap-3 w-80 my-6">
         <AnimatePresence>
           {response && (
             <motion.div
@@ -100,14 +104,14 @@ function App() {
         </AnimatePresence>
       </div>
 
-      <section className='flex items-center gap-4 my-2'>
+      <section className='flex items-center gap-4'>
         <motion.button
           role="button"
           onClick={check}
           whileHover={{ scale: 1.05, y: -2 }}
           whileTap={{ scale: 0.97, y: 1 }}
           transition={{ type: 'spring', stiffness: 300, damping: 15 }}
-          className="px-4 py-2 text-xl  rounded shadow-md outline-none bg-[#9CF6F6] hover:bg-[#57EFEF] active:bg-[#57EFEF]"
+          className="px-6 py-3 sm:px-4 sm:py-2 text-xl font-bold  rounded shadow-md outline-none bg-[#06BA63] hover:bg-[#059E54] active:bg-[#059E54]"
         >
           Validar
         </motion.button>
@@ -117,13 +121,13 @@ function App() {
           whileHover={{ scale: 1.05, y: -2 }}
           whileTap={{ scale: 0.97, y: 1 }}
           transition={{ type: 'spring', stiffness: 300, damping: 15 }}
-          className="p-2 rounded shadow-md hover:bg-red-200 active:bg-red-200"
+          className="p-3 sm:p-2 rounded shadow-md hover:bg-red-200 active:bg-red-200"
         >
           <img src={ReloadIcon} alt="Recargar" className="h-[1.9rem]" />
         </motion.button>
       </section>
 
-      <footer className='absolute bottom-10 opacity-90'>
+      <footer className='absolute bottom-5 opacity-90'>
         Made with ❤️ by Alan Ruanova & Jennifer Álvarez.
       </footer>
     </main>
