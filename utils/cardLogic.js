@@ -84,17 +84,29 @@ const construirMastercard = () => {
 
 
 const construirAmex = () => {
-  const estados = Array.from({ length: 16 }, (_, i) =>
-    new Estado(`aq${i}`, i === 15, "Amex")
+  const estados = Array.from({ length: 17 }, (_, i) =>
+    new Estado(`aq${i}`, i === 16, "Amex")
   );
+
+  // Prefijo: debe comenzar con 34 o 37
   estados[0].agregarTransicion("3", estados[1]);
   estados[1].agregarTransicion("4", estados[2]);
-  estados[1].agregarTransicion("7", estados[2]);
-  for (let i = 2; i < 15; i++) {
+  estados[1].agregarTransicion("7", estados[3]);
+
+  // q2 y q3 → q4 con cualquier dígito
+  for (let d of "0123456789") {
+    estados[2].agregarTransicion(d, estados[4]);
+    estados[3].agregarTransicion(d, estados[4]);
+  }
+
+  // De q4 a q14: transiciones con cualquier dígito al siguiente estado
+  for (let i = 4; i < 16; i++) {
     for (let d of "0123456789") {
       estados[i].agregarTransicion(d, estados[i + 1]);
     }
   }
+
+
   return estados[0];
 };
 
@@ -107,6 +119,7 @@ const simularAFD = (estadoInicial, entrada) => {
   }
   return estado.esFinal ? estado.tipoTarjeta : null;
 };
+
 
 // ----- Función exportable -----
 function detectarTipoDeTarjeta(numero) {
